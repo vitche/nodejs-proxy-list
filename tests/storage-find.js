@@ -2,7 +2,13 @@ var main = require('../main');
 module.exports = {
     testSimpleFind: function (test) {
         var storage = new main.Storage();
-        storage.find({}, {}, {
+        storage.find({
+            type: 2 // HTTPS
+        }, {
+            __v: false,
+            _id: false,
+            type: false
+        }, {
             skip: 5,
             limit: 5
         }, function (error, data) {
