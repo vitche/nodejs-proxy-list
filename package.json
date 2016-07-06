@@ -1,11 +1,10 @@
 {
     "name": "nodejs-proxy-list",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "private": true,
-    "scripts": {
-        "start": "node ./bin/www"
-    },
+    "main": "main.js",
     "dependencies": {
-        "nodejs-proxy-queue-client": "git+https://github.com/vitche/nodejs-proxy-queue-client.git"
+        "nodejs-proxy-queue-client": "git+https://github.com/vitche/nodejs-proxy-queue-client.git",
+        "nodeunit": "~0.9.1"
     }
 }
