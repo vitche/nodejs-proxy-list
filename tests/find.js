@@ -12,8 +12,8 @@ module.exports = {
             skip: 5,
             limit: 5
         }, function (error, data) {
-            test.ok(undefined == error, 'storage-find should not return error');
-            test.ok(data instanceof Array, 'storage-find should return array of data');
+            test.ok(undefined == error, 'find should not return error');
+            test.ok(data instanceof Array, 'find should return array of data');
             test.done();
         });
     }

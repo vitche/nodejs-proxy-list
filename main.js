@@ -1,10 +1,27 @@
 var proxyQueueClient = require('nodejs-proxy-queue-client');
 module.exports.Storage = function () {
     var self = this;
+    /**
+     * Looks for proxies matching the search criteria.
+     * Execution time is limited.
+     * @param conditions
+     * @param projection
+     * @param options
+     * @param callback
+     */
     self.find = function (conditions, projection, options, callback) {
         // Connect to the proxy queue
         var client = new proxyQueueClient();
         client.connect(function (error) {
+            var finished = false;
+            setTimeout(function () {
+                if (finished) {
+                    return;
+                }
+                callback(new Error('nodejs-proxy-list.find timeout'));
+                client.disconnect();
+                delete client;
+            }, 25000);
             if (undefined != error) {
                 callback(error);
                 return;
@@ -26,6 +43,7 @@ module.exports.Storage = function () {
                     callback(error, data.data);
                     client.disconnect();
                     delete client;
+                    finished = true;
                 }
             });
             client.proxy.list.publish(query);
